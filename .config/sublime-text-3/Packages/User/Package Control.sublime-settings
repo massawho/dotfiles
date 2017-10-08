@@ -5,6 +5,7 @@
 	],
 	"installed_packages":
 	[
+		"A File Icon",
 		"Behat",
 		"Case Conversion",
 		"ColorSchemeSelector",
@@ -24,7 +25,6 @@
 		"Nginx Log Highlighter",
 		"Notes",
 		"One Dark Color Scheme",
-		"One Dark Material - Theme",
 		"Package Control",
 		"PlainNotes",
 		"SideBarEnhancements",
