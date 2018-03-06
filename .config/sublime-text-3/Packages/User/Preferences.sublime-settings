@@ -13,15 +13,13 @@
 		"*.swf",
 		"*.tga",
 		"*.ttf",
-		"*.zip",
-		"node_modules/**"
+		"*.zip"
 	],
-	"color_scheme": "Packages/Facebook Material Theme/schemes/Material-Theme.tmTheme",
+	"color_scheme": "Packages/Materialize/schemes/Material Dracula.tmTheme",
 	"font_face": "Hack",
 	"font_size": 11,
 	"ignored_packages":
 	[
-		"Vintage"
 	],
 	"rulers":
 	[
@@ -29,5 +27,5 @@
 		100,
 		120
 	],
-	"theme": "Material-Theme.sublime-theme"
+	"theme": "Material Dracula.sublime-theme"
 }
