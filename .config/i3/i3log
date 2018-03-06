@@ -1,7 +1,0 @@
-20/09/17 12:39:11 - ERROR: Using Xinerama instead of RandR. This option should be avoided at all cost because it does not refresh the list of screens, so you cannot configure displays at runtime. Please check if your driver really does not support RandR and disable this option as soon as you can.
-20/09/17 12:39:11 - i3 4.13 (2016-11-08) starting
-20/09/17 12:39:11 - Parsing configfile /home/massa/.config/i3/config
-20/09/17 12:39:11 - deciding for version 4 due to this line: # i3 config file (v4)
-20/09/17 12:39:11 - [libi3] ../../i3-4.13/libi3/font.c Using Pango font monospace, size 8
-20/09/17 12:39:11 - [libi3] ../../i3-4.13/libi3/font.c X11 root window dictates 96.000000 DPI
-20/09/17 12:39:11 - ERROR: Another window manager seems to be running (X error 10)

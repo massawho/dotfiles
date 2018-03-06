@@ -1,0 +1,9 @@
+# Shadow
+shadow = false;			# Enabled client-side shadows on windows.
+no-dock-shadow = true;		# Avoid drawing shadows on dock/panel windows.
+no-dnd-shadow = true;		# Don't draw shadows on DND windows.
+clear-shadow = true;		# Zero the part of the shadow's mask behind the
+				# window. Fix some weirdness with ARGB windows.
+shadow-ignore-shaped = true;	# Avoid drawing shadow on all shaped windows
+
+opacity-rule = ["85:class_g = 'xfce4-terminal'"];
