@@ -7,7 +7,15 @@
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="gnzh"
+ZSH_THEME="agnoster"
+
+# Set list of themes to load
+# Setting this variable when ZSH_THEME=random
+# cause zsh load theme from this variable instead of
+# looking in ~/.oh-my-zsh/themes/
+# An empty array have no effect
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -51,7 +59,12 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git debian docker ruby rake)
+plugins=(
+  git
+  docker
+  ruby
+  rake
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -84,19 +97,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# -------------------------------------------------------------------
-# Git aliases
-# -------------------------------------------------------------------
-alias gtaa='git add -A'
-alias gtap='git add -p'
-alias gta='git add'
-alias gtpl='git pull'
-alias gtpsh='git push'
-alias gtcm='git commit'
-alias gst='git status'
-alias gdf='git diff'
-alias gtck='git checkout'
-alias cont='git rebase --continue'
-alias abort='git rebase --abort'
-
-~/fogland/scripts/batmanclassic.sh
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
