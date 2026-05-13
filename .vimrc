@@ -22,6 +22,13 @@ Plug 'elixir-editors/vim-elixir'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'editorconfig/editorconfig-vim'
 
+" Colorschemes
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
+
 call plug#end()
 
 """ General
@@ -63,12 +70,18 @@ set listchars=tab:>-,trail:-
 set nowrap
 set colorcolumn=100,120
 
-""" Colors — inherit terminal palette, let syntax layer on top
+""" Colors
 set t_Co=256
 set background=dark
 if has('termguicolors') && ($COLORTERM ==# 'truecolor' || $COLORTERM ==# '24bit')
   set termguicolors
 endif
+
+" Active colorscheme — switch by changing this line:
+" gruvbox | onedark | nord | dracula | catppuccin
+let g:catppuccin_flavour = 'mocha'
+silent! colorscheme catppuccin
+
 hi Normal ctermbg=NONE guibg=NONE
 
 """ Sign column
