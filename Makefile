@@ -2,9 +2,9 @@ DOTFILES_DIR := $(shell pwd)
 XDG_CONFIG_HOME ?= $(HOME)/.config
 XDG_DATA_HOME ?= $(HOME)/.local/share
 
-.PHONY: install install-i3 install-dunst install-rofi install-rofi-themes
+.PHONY: install install-i3 install-dunst install-rofi install-rofi-themes install-vim
 
-install: install-i3 install-dunst install-rofi install-rofi-themes
+install: install-i3 install-dunst install-rofi install-rofi-themes install-vim
 
 define symlink
 	@if [ -L "$(2)" ]; then \
@@ -32,3 +32,6 @@ install-rofi:
 
 install-rofi-themes:
 	$(call symlink,.local/share/rofi/themes,$(XDG_DATA_HOME)/rofi/themes)
+
+install-vim:
+	$(call symlink,.vimrc,$(HOME)/.vimrc)
