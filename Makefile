@@ -27,9 +27,11 @@ install-i3:
 		echo "arc-dark" > "$(XDG_CONFIG_HOME)/i3/themes/current"; \
 		echo "i3 theme: defaulted to arc-dark"; \
 	fi
+	@git update-index --skip-worktree .config/i3/config 2>/dev/null || true
 
 install-dunst:
 	$(call symlink,.config/dunst,$(XDG_CONFIG_HOME)/dunst)
+	@git update-index --skip-worktree .config/dunst/dunstrc 2>/dev/null || true
 
 install-rofi:
 	$(call symlink,.config/rofi,$(XDG_CONFIG_HOME)/rofi)
