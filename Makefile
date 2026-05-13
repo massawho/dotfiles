@@ -2,9 +2,9 @@ DOTFILES_DIR := $(shell pwd)
 XDG_CONFIG_HOME ?= $(HOME)/.config
 XDG_DATA_HOME ?= $(HOME)/.local/share
 
-.PHONY: install install-i3 install-dunst install-rofi install-rofi-themes install-vim theme
+.PHONY: install install-i3 install-dunst install-rofi install-rofi-themes install-vim install-xfce4-terminal theme
 
-install: install-i3 install-dunst install-rofi install-rofi-themes install-vim
+install: install-i3 install-dunst install-rofi install-rofi-themes install-vim install-xfce4-terminal
 
 define symlink
 	@if [ -L "$(2)" ]; then \
@@ -39,6 +39,10 @@ install-rofi-themes:
 
 install-vim:
 	$(call symlink,.vimrc,$(HOME)/.vimrc)
+
+install-xfce4-terminal:
+	$(call symlink,.config/xfce4/terminal,$(XDG_CONFIG_HOME)/xfce4/terminal)
+	$(call symlink,.local/share/xfce4/terminal/colorschemes,$(XDG_DATA_HOME)/xfce4/terminal/colorschemes)
 
 theme:
 	@~/.config/i3/scripts/theme-switcher
