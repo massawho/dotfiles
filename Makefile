@@ -1,29 +1,34 @@
 DOTFILES_DIR := $(shell pwd)
 XDG_CONFIG_HOME ?= $(HOME)/.config
+XDG_DATA_HOME ?= $(HOME)/.local/share
 
-.PHONY: install install-i3 install-dunst install-rofi
+.PHONY: install install-i3 install-dunst install-rofi install-rofi-themes
 
-install: install-i3 install-dunst install-rofi
+install: install-i3 install-dunst install-rofi install-rofi-themes
 
-define symlink-config
-	@if [ -L "$(XDG_CONFIG_HOME)/$(1)" ]; then \
+define symlink
+	@if [ -L "$(2)" ]; then \
 		echo "$(1): already symlinked, skipping"; \
-	elif [ -d "$(XDG_CONFIG_HOME)/$(1)" ]; then \
-		mv "$(XDG_CONFIG_HOME)/$(1)" "$(XDG_CONFIG_HOME)/$(1).bak"; \
-		echo "$(1): backed up existing dir to $(XDG_CONFIG_HOME)/$(1).bak"; \
-		ln -sf "$(DOTFILES_DIR)/.config/$(1)" "$(XDG_CONFIG_HOME)/$(1)"; \
+	elif [ -e "$(2)" ]; then \
+		mv "$(2)" "$(2).bak"; \
+		echo "$(1): backed up to $(2).bak"; \
+		ln -sf "$(DOTFILES_DIR)/$(1)" "$(2)"; \
 		echo "$(1): symlinked"; \
 	else \
-		ln -sf "$(DOTFILES_DIR)/.config/$(1)" "$(XDG_CONFIG_HOME)/$(1)"; \
+		mkdir -p "$(dir $(2))"; \
+		ln -sf "$(DOTFILES_DIR)/$(1)" "$(2)"; \
 		echo "$(1): symlinked"; \
 	fi
 endef
 
 install-i3:
-	$(call symlink-config,i3)
+	$(call symlink,.config/i3,$(XDG_CONFIG_HOME)/i3)
 
 install-dunst:
-	$(call symlink-config,dunst)
+	$(call symlink,.config/dunst,$(XDG_CONFIG_HOME)/dunst)
 
 install-rofi:
-	$(call symlink-config,rofi)
+	$(call symlink,.config/rofi,$(XDG_CONFIG_HOME)/rofi)
+
+install-rofi-themes:
+	$(call symlink,.local/share/rofi/themes,$(XDG_DATA_HOME)/rofi/themes)
