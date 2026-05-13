@@ -10,10 +10,11 @@ A fair warning: this repo has years of abandoned history behind it. The configs 
 
 | Config | Location | `make` target | Notes |
 |---|---|---|---|
-| i3 | `~/.config/i3` | `install-i3` | Includes i3blocks and all scripts |
+| i3 | `~/.config/i3` | `install-i3` | Includes i3blocks, keybindings, and all scripts |
 | dunst | `~/.config/dunst` | `install-dunst` | Notification daemon |
 | rofi | `~/.config/rofi` | `install-rofi` | Launcher and power menu themes |
-| rofi themes | `~/.local/share/rofi/themes` | `install-rofi-themes` | Arc dark and deep-purple themes from EndeavourOS |
+| rofi themes | `~/.local/share/rofi/themes` | `install-rofi-themes` | Arc dark and Catppuccin palettes |
+| xfce4-terminal | `~/.config/xfce4/terminal` | `install-xfce4-terminal` | Config and Catppuccin color schemes |
 | vim | `~/.vimrc` | `install-vim` | vim-plug, auto-installs plugins on first launch |
 
 ## Install
@@ -34,6 +35,22 @@ Individual targets work too if you only want part of it:
 make install-i3
 make install-vim
 ```
+
+## Theming
+
+Themes are switched with `make theme` or `$mod+F2`, which opens a rofi menu to pick from the available options. Switching applies to i3 (bar and window borders), dunst (notification background and frame), and rofi simultaneously, then reloads both.
+
+Available themes:
+
+- `arc-dark` — the EndeavourOS default, dark navy
+- `catppuccin-mocha` — warm dark gray
+- `catppuccin-macchiato` — cool dark blue-gray
+- `catppuccin-frappe` — medium dark gray
+- `catppuccin-latte` — light
+
+Active theme selection is intentionally not committed — each machine manages its own independently. `make install` marks the relevant files with `git update-index --skip-worktree` so theme switches never show as dirty.
+
+For xfce4-terminal, Catppuccin color schemes (mocha, macchiato, frappe, latte) are available under **Edit → Preferences → Colors → Load Presets** after install. The theme switcher does not touch the terminal.
 
 ## Vim
 
@@ -72,11 +89,14 @@ There is no dependency install script yet. A few things the configs assume are p
 ```
 dotfiles/
 ├── .config/
-│   ├── i3/            # i3 config, i3blocks.conf, keybindings, scripts/
-│   ├── dunst/         # dunstrc
-│   └── rofi/          # config.rasi, powermenu, power-profiles, rofidmenu, rofikeyhint
+│   ├── i3/                  # i3 config, i3blocks.conf, keybindings, scripts/, themes/
+│   ├── dunst/               # dunstrc
+│   ├── rofi/                # config.rasi, powermenu, power-profiles, rofidmenu, rofikeyhint
+│   └── xfce4/terminal/      # terminalrc, accels.scm
 ├── .local/share/
-│   └── rofi/themes/   # arc_dark, arc_dark_transparent, deep-purple
+│   ├── rofi/themes/         # arc_dark, Catppuccin palettes
+│   └── xfce4/terminal/
+│       └── colorschemes/    # Catppuccin .theme files
 ├── .vimrc
 └── Makefile
 ```
