@@ -3,6 +3,7 @@ set -euo pipefail
 
 I3_THEMES="$HOME/.config/i3/themes"
 I3_CONFIG="$HOME/.config/i3/config"
+DUNST_CONFIG="$HOME/.config/dunst/dunstrc"
 ROFI_THEMES="$HOME/.local/share/rofi/themes"
 ROFI_CONFIG="$HOME/.config/rofi/config.rasi"
 
@@ -27,7 +28,7 @@ selected=$(echo "$menu" | rofi -dmenu -p "Theme" -i | sed 's/^[* ]*//')
 theme_file="$I3_THEMES/$selected"
 [ ! -f "$theme_file" ] && { notify-send "Theme" "Theme file not found: $selected" --urgency=critical; exit 1; }
 
-# Replace the THEME_BEGIN...THEME_END block in the i3 config
+# Apply i3 theme — replace THEME_BEGIN...THEME_END block
 theme_block=$(cat "$theme_file")
 python3 - "$I3_CONFIG" "$theme_block" <<'EOF'
 import sys, re
@@ -35,7 +36,7 @@ import sys, re
 config_path = sys.argv[1]
 new_block = sys.argv[2]
 
-with open(config_path, 'r') as f:
+with open(config_path) as f:
     content = f.read()
 
 pattern = r'(# THEME_BEGIN[^\n]*\n).*?(# THEME_END)'
@@ -46,7 +47,47 @@ with open(config_path, 'w') as f:
     f.write(updated)
 EOF
 
-# Track current theme by name
+# Apply dunst theme — parse i3 theme vars and update dunstrc
+python3 - "$theme_file" "$DUNST_CONFIG" <<'EOF'
+import sys, re
+
+theme_path = sys.argv[1]
+dunst_path = sys.argv[2]
+
+colors = {}
+with open(theme_path) as f:
+    for line in f:
+        m = re.match(r'set \$(\w+)\s+(#[0-9a-fA-F]+)', line.strip())
+        if m:
+            colors[m.group(1)] = m.group(2)
+
+with open(dunst_path) as f:
+    lines = f.readlines()
+
+section = None
+result = []
+for line in lines:
+    sec = re.match(r'\[(\w+)\]', line.strip())
+    if sec:
+        section = sec.group(1)
+
+    if re.match(r'\s*background\s*=', line) and section and section.startswith('urgency'):
+        line = re.sub(r'"#[0-9a-fA-F]+"', f'"{colors["darkgrey"]}"', line)
+    elif re.match(r'\s*foreground\s*=', line) and section and section.startswith('urgency'):
+        line = re.sub(r'"#[0-9a-fA-F]+"', f'"{colors["white"]}"', line)
+    elif re.match(r'\s*frame_color\s*=', line):
+        if section == 'urgency_critical':
+            line = re.sub(r'"#[0-9a-fA-F]+"', f'"{colors["urgentred"]}"', line)
+        else:
+            line = re.sub(r'"#[0-9a-fA-F]+"', f'"{colors["mediumgrey"]}"', line)
+
+    result.append(line)
+
+with open(dunst_path, 'w') as f:
+    f.writelines(result)
+EOF
+
+# Track current theme
 echo "$selected" > "$I3_THEMES/current"
 
 # Apply rofi theme
@@ -57,7 +98,11 @@ else
     echo "@theme \"$ROFI_THEMES/arc_dark_transparent_colors.rasi\"" > "$ROFI_CONFIG"
 fi
 
-# Reload i3
+# Reload i3 and restart dunst
 i3-msg reload > /dev/null
+pkill dunst || true
+sleep 0.3
+dunst &
+sleep 0.3
 
 notify-send "Theme" "Switched to $selected" --urgency=low
