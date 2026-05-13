@@ -1,0 +1,12 @@
+# Catppuccin Latte (light)
+set $darkbluetrans  #eff1f5e6
+set $darkblue       #eff1f5
+set $lightblue      #1e66f5
+set $urgentred      #d20f39
+set $white          #4c4f69
+set $black          #dce0e8
+set $purple         #8839ef
+set $darkgrey       #ccd0da
+set $grey           #6c6f85
+set $mediumgrey     #acb0be
+set $yellowbrown    #df8e1d

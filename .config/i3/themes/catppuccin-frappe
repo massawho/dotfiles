@@ -1,0 +1,12 @@
+# Catppuccin Frappe
+set $darkbluetrans  #303446e6
+set $darkblue       #303446
+set $lightblue      #8caaee
+set $urgentred      #e78284
+set $white          #c6d0f5
+set $black          #232634
+set $purple         #ca9ee6
+set $darkgrey       #292c3c
+set $grey           #a5adce
+set $mediumgrey     #51576d
+set $yellowbrown    #e5c890

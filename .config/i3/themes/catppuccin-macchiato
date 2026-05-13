@@ -1,0 +1,12 @@
+# Catppuccin Macchiato
+set $darkbluetrans  #24273ae6
+set $darkblue       #24273a
+set $lightblue      #8aadf4
+set $urgentred      #ed8796
+set $white          #cad3f5
+set $black          #181926
+set $purple         #c6a0f6
+set $darkgrey       #1e2030
+set $grey           #a5adcb
+set $mediumgrey     #494d64
+set $yellowbrown    #eed49f

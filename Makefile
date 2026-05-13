@@ -2,7 +2,7 @@ DOTFILES_DIR := $(shell pwd)
 XDG_CONFIG_HOME ?= $(HOME)/.config
 XDG_DATA_HOME ?= $(HOME)/.local/share
 
-.PHONY: install install-i3 install-dunst install-rofi install-rofi-themes install-vim
+.PHONY: install install-i3 install-dunst install-rofi install-rofi-themes install-vim theme
 
 install: install-i3 install-dunst install-rofi install-rofi-themes install-vim
 
@@ -23,6 +23,10 @@ endef
 
 install-i3:
 	$(call symlink,.config/i3,$(XDG_CONFIG_HOME)/i3)
+	@if [ ! -f "$(XDG_CONFIG_HOME)/i3/themes/current" ]; then \
+		echo "arc-dark" > "$(XDG_CONFIG_HOME)/i3/themes/current"; \
+		echo "i3 theme: defaulted to arc-dark"; \
+	fi
 
 install-dunst:
 	$(call symlink,.config/dunst,$(XDG_CONFIG_HOME)/dunst)
@@ -35,3 +39,7 @@ install-rofi-themes:
 
 install-vim:
 	$(call symlink,.vimrc,$(HOME)/.vimrc)
+
+theme:
+	@~/.config/i3/scripts/theme-switcher
+

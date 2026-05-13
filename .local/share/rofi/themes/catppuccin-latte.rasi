@@ -1,0 +1,31 @@
+/* Catppuccin Latte */
+* {
+    background:                  #eff1f5;
+    foreground:                  #4c4f69;
+    separatorcolor:              #ccd0da;
+    bordercolor:                 #1e66f5;
+
+    normal-background:           #eff1f5;
+    normal-foreground:           #4c4f69;
+    alternate-normal-background: #ccd0da;
+    alternate-normal-foreground: #4c4f69;
+    selected-normal-background:  #1e66f5;
+    selected-normal-foreground:  #eff1f5;
+
+    urgent-background:           #eff1f5;
+    urgent-foreground:           #d20f39;
+    alternate-urgent-background: #ccd0da;
+    alternate-urgent-foreground: #d20f39;
+    selected-urgent-background:  #d20f39;
+    selected-urgent-foreground:  #eff1f5;
+
+    active-background:           #eff1f5;
+    active-foreground:           #40a02b;
+    alternate-active-background: #ccd0da;
+    alternate-active-foreground: #40a02b;
+    selected-active-background:  #40a02b;
+    selected-active-foreground:  #eff1f5;
+
+    background-color:            @background;
+    text-color:                  @foreground;
+}

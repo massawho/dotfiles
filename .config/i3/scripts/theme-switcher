@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+I3_THEMES="$HOME/.config/i3/themes"
+I3_CONFIG="$HOME/.config/i3/config"
+ROFI_THEMES="$HOME/.local/share/rofi/themes"
+ROFI_CONFIG="$HOME/.config/rofi/config.rasi"
+
+current=""
+[ -f "$I3_THEMES/current" ] && current=$(cat "$I3_THEMES/current")
+
+themes=$(ls "$I3_THEMES" | grep -v '^current$' | sort)
+
+menu=$(for t in $themes; do
+    if [ "$t" = "$current" ]; then
+        echo "* $t"
+    else
+        echo "  $t"
+    fi
+done)
+
+selected=$(echo "$menu" | rofi -dmenu -p "Theme" -i | sed 's/^[* ]*//')
+
+[ -z "$selected" ] && exit 0
+[ "$selected" = "$current" ] && exit 0
+
+theme_file="$I3_THEMES/$selected"
+[ ! -f "$theme_file" ] && { notify-send "Theme" "Theme file not found: $selected" --urgency=critical; exit 1; }
+
+# Replace the THEME_BEGIN...THEME_END block in the i3 config
+theme_block=$(cat "$theme_file")
+python3 - "$I3_CONFIG" "$theme_block" <<'EOF'
+import sys, re
+
+config_path = sys.argv[1]
+new_block = sys.argv[2]
+
+with open(config_path, 'r') as f:
+    content = f.read()
+
+pattern = r'(# THEME_BEGIN[^\n]*\n).*?(# THEME_END)'
+replacement = r'\g<1>' + new_block + '\n' + r'\2'
+updated = re.sub(pattern, replacement, content, flags=re.DOTALL)
+
+with open(config_path, 'w') as f:
+    f.write(updated)
+EOF
+
+# Track current theme by name
+echo "$selected" > "$I3_THEMES/current"
+
+# Apply rofi theme
+rofi_theme="$ROFI_THEMES/$selected.rasi"
+if [ -f "$rofi_theme" ]; then
+    echo "@theme \"$rofi_theme\"" > "$ROFI_CONFIG"
+else
+    echo "@theme \"$ROFI_THEMES/arc_dark_transparent_colors.rasi\"" > "$ROFI_CONFIG"
+fi
+
+# Reload i3
+i3-msg reload > /dev/null
+
+notify-send "Theme" "Switched to $selected" --urgency=low

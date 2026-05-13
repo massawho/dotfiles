@@ -1,0 +1,31 @@
+/* Catppuccin Frappe */
+* {
+    background:                  #303446;
+    foreground:                  #c6d0f5;
+    separatorcolor:              #414559;
+    bordercolor:                 #8caaee;
+
+    normal-background:           #303446;
+    normal-foreground:           #c6d0f5;
+    alternate-normal-background: #414559;
+    alternate-normal-foreground: #c6d0f5;
+    selected-normal-background:  #8caaee;
+    selected-normal-foreground:  #303446;
+
+    urgent-background:           #303446;
+    urgent-foreground:           #e78284;
+    alternate-urgent-background: #414559;
+    alternate-urgent-foreground: #e78284;
+    selected-urgent-background:  #e78284;
+    selected-urgent-foreground:  #303446;
+
+    active-background:           #303446;
+    active-foreground:           #a6d189;
+    alternate-active-background: #414559;
+    alternate-active-foreground: #a6d189;
+    selected-active-background:  #a6d189;
+    selected-active-foreground:  #303446;
+
+    background-color:            @background;
+    text-color:                  @foreground;
+}

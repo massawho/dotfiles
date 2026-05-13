@@ -1,0 +1,12 @@
+# Catppuccin Mocha
+set $darkbluetrans  #1e1e2ee6
+set $darkblue       #1e1e2e
+set $lightblue      #89b4fa
+set $urgentred      #f38ba8
+set $white          #cdd6f4
+set $black          #11111b
+set $purple         #cba6f7
+set $darkgrey       #181825
+set $grey           #a6adc8
+set $mediumgrey     #45475a
+set $yellowbrown    #f9e2af
