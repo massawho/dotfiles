@@ -4,8 +4,6 @@ Personal configuration files for an Arch-based Linux setup running i3wm. This re
 
 The approach is simple: the repo mirrors the home directory structure, and `make install` creates symlinks from the expected locations into the repo. Editing a config file in either place works the same way because they are the same file.
 
-A fair warning: this repo has years of abandoned history behind it. The configs below are the ones actively maintained and wired into the install. Everything else you see committed is legacy that has not been cleaned up yet.
-
 ## What is covered
 
 | Config | Location | `make` target | Notes |
