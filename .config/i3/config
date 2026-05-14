@@ -221,10 +221,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+b move up
-bindsym $mod+Shift+o move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -233,7 +233,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+Shift+h split h
+bindsym $mod+Shift+s split h
 
 # split in vertical orientation
 bindsym $mod+Shift+v split v
@@ -481,18 +481,18 @@ for_window [class="urxvt"] border pixel 1
 ######################################
 
 # THEME_BEGIN — do not edit this block manually, use: make theme
-# Catppuccin Latte (light)
-set $darkbluetrans  #eff1f5e6
-set $darkblue       #eff1f5
-set $lightblue      #1e66f5
-set $urgentred      #d20f39
-set $white          #4c4f69
-set $black          #dce0e8
-set $purple         #8839ef
-set $darkgrey       #ccd0da
-set $grey           #6c6f85
-set $mediumgrey     #acb0be
-set $yellowbrown    #df8e1d
+# Arc Dark (EndeavourOS default)
+set $darkbluetrans  #08052be6
+set $darkblue       #08052b
+set $lightblue      #5294e2
+set $urgentred      #e53935
+set $white          #ffffff
+set $black          #000000
+set $purple         #e345ff
+set $darkgrey       #383c4a
+set $grey           #b0b5bd
+set $mediumgrey     #8b8b8b
+set $yellowbrown    #e1b700
 # THEME_END
 
 # define colors for windows:
